@@ -1,10 +1,17 @@
 <?php
 
-namespace App\Model\Api;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model\Api\Transaction;
+
+
 
 class buyer extends User
 {
-    //
+    public function transaction()
+    {
+
+        return $this->hasMany(Transaction::class);
+
+    }
+    
 }

@@ -12,4 +12,10 @@ class Category extends Model
     "name",
     "description"
  ];
+
+ public function Product()
+ {
+
+   return $this->belongsToMany(Product::class);
+ }
 }
