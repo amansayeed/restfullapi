@@ -30,7 +30,7 @@ class User extends Model
     ];
 
     /**
-@@ -24,6 +35,23 @@ class User extends Authenticatable
+
      * @var array
      */
     protected $hidden = [
@@ -55,4 +55,4 @@ class User extends Model
         return str_random(40);
     }
 }
-
+ 

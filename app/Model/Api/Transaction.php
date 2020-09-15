@@ -4,12 +4,25 @@ namespace App\Model\Api;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tansaction extends Model
+class Transaction extends Model
 {
  protected $fillable=
  [
      'quantity',
-     "seller_id",
+     "product_id",
      "buyer_id"
  ];
+
+ public function buyer()
+ {
+
+    return $this->belongsTo(Buyer::class);
+ }
+ public function product()
+ {
+
+    return $this->belongsTo(Product::class);
+ }
+
+
 }
