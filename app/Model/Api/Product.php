@@ -2,12 +2,17 @@
 
 namespace App\Model\Api;
 
+use App\Model\Api\Category;
+use App\Model\Api\Transaction;
+use App\Model\Api\Seller;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {    const AVAILABLE_PRODUCT="available";
     const UNAVAILABLE_PRODUCT="unavailable";  
     
+    protected $table="products";
     protected $fiilable=
     [
         "name",
@@ -19,22 +24,18 @@ class Product extends Model
 
     ];
 
-    public function isAvailable(){
-        return $this->status==Product::AVAILABLE_PRODUCT;
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
     }
 
-  
-   public function Category()
-   {
-       return $this->belongsToMany(Category::class);
-   }
-   public function seller()
-   {
-       return $this->belongsTo(Seller::class);
-   }
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
-   public function transaction()
-   {
-       return $this->hasToMany(Transaction::class);
-   }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

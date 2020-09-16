@@ -1,11 +1,13 @@
 <?php
-
+namespace App\Model\Api;
 
 use App\Model\Api\Transaction;
+use App\Model\Api\User;
 
 
 
-class buyer extends User
+
+class Buyer extends User
 {
 
 

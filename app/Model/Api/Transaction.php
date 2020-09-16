@@ -3,9 +3,15 @@
 namespace App\Model\Api;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Api\Product;
+use App\Model\Api\Buyer;
+use App\Model\Api\Seller;
+
 
 class Transaction extends Model
 {
+
+   protected $table="tansactions";
  protected $fillable=
  [
      'quantity',

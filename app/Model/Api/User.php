@@ -3,16 +3,24 @@
 namespace App\Model\Api;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+
 
 class User extends Model
 {
-    use Notifiable;
+
+    protected $table = 'users';
+   // use Notifiable;
 
     const VERIFIED_USER = '1';
     const UNVERIFIED_USER = '0';
 
     const ADMIN_USER = 'true';
     const REGULAR_USER = 'false';
+  
 
     /**
      * The attributes that are mass assignable.
@@ -20,8 +28,8 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
-        'name',
+        'name', 
+        
         'email',
         'password',
         'verified',
@@ -52,7 +60,7 @@ class User extends Model
 
     public static function generateVerificationCode()
     {
-        return str_random(40);
+        return Str::random(40);
     }
 }
  
