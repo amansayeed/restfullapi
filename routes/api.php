@@ -17,15 +17,24 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+//User controller 
  Route::resource("users",'User\UserController',['except'=>['create','edit']]);
+ //Route::resource("users",'User\UserController');
 
+
+// buyer controller 
  Route::resource("buyers",'Buyer\BuyerController',['only'=>['index','show']]);
 
+// seller controller 
  Route::resource("seller",'Seller\SellerController',['only'=>['index','show']]);
 
- Route::resource("catgory",'Category\CategoryController',['except'=>['create','edit']]);
+//category controller 
+ Route::resource("category",'Category\CategoryController',['except'=>['create','edit']]);
 
+ //product controller
  Route::resource("product",'Product\ProductController',['only'=>['index','show']]);
 
+
+//transaction controller 
  Route::resource("transaction",'Transaction\TransactionController',['only'=>['index','show']]);
  

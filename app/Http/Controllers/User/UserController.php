@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Model\Api\User;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+         $user = User::all();
+         return response($user,200);
     }
 
     /**
@@ -46,7 +49,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user=User::find($id);
+        if(is_null($user))
+        {
+            return response()->json("id not found  in the recodes",404);
+        }
+        else{
+                return response()->json($user,200);
+        }
+      
     }
 
     /**
