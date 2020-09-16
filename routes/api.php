@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 //User controller 
- Route::resource("users",'User\UserController',['except'=>['create','edit']]);
- //Route::resource("users",'User\UserController');
+Route::resource("users",'User\UserController',['except'=>['edit']]);
+//Route::resource("users",'User\UserController');
 
 
 // buyer controller 
