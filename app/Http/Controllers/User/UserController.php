@@ -96,7 +96,48 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+        $user= User::findOrFail($id);
+        
+        $rules=
+        [
+            'email'=>'email|unique:users,email,'.$user->id,
+            'password'=>'min:6|confirmed',
+            'admin'=>'in:'. User::ADMIN_USER .','. User::REGULAR_USER
+
+        ];
+
+        if($request->has('name'))
+        {
+            $user->name=$request->name;
+        }
+
+        if($request->has('email') && $user->email != $request->email)
+        {
+            $user->verification=User::UNVERIFIED_USER;
+            $user->verification_token=User::generateVerificationCode();
+            $user->email=$request->email;
+        }
+        if($request->has('password'))
+        {
+            $user->password=bcrypt($request->password);
+        }
+
+        if($request->has('admin'))
+        {
+            if(!$user->isVerified())
+            return response()->json(["message"=>"this user is not verified","code"=>409],409);
+        
+        }
+
+         $user->admin=$request->amdin;
+
+
+            if(!$user->isDirty())
+            {
+             return response()->json(["message"=>"update the differnet values ","code"=>422],422);
+            }
+                $user->save;
+            return response()->json($user,409);
 
     }
 
@@ -108,6 +149,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::findOrFail($id);
+        $user->delete();
+        return response()->json('User has been delete',200);
     }
 }
