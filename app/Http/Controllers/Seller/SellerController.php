@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Api\ Seller;
 
 class SellerController extends Controller
 {
@@ -14,7 +15,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        //
+        $seller=Seller::has('products')->get();
+        return response()->json(['data'=>$seller,200]);
     }
 
     /**
@@ -46,7 +48,14 @@ class SellerController extends Controller
      */
     public function show($id)
     {
-        //
+        $seller=Seller::has('products')->findOrFail($id);
+        // print_r($seller);
+        // die();
+        if(is_null($seller))
+        {
+            return response()->json(["data"=>"id is not exist in the recodes"],404);
+        }
+        return response()->json($seller,200);
     }
 
     /**
