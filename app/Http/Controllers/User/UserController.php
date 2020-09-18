@@ -63,9 +63,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user=User::find($id);
+       // $user=User::find($id);
         if(is_null($user))
         {
             return response()->json("id not found  in the recodes",404);
@@ -73,7 +73,7 @@ class UserController extends Controller
         else{
                 return response()->json($user,200);
         }
-      
+
     }
 
     /**
@@ -97,7 +97,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user= User::findOrFail($id);
-        
+
         $rules=
         [
             'email'=>'email|unique:users,email,'.$user->id,
@@ -126,7 +126,7 @@ class UserController extends Controller
         {
             if(!$user->isVerified())
             return response()->json(["message"=>"this user is not verified","code"=>409],409);
-        
+
         }
 
          $user->admin=$request->amdin;
@@ -147,9 +147,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user=User::findOrFail($id);
+       // $user=User::findOrFail($id);
         $user->delete();
         return response()->json('User has been delete',200);
     }
