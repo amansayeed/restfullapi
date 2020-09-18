@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Seller;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Api\ Seller;
-
+use App\Traits\ApiResponse;
+//use    ApiResponser;
 class SellerController extends Controller
 {
+    use  ApiResponse;
+
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,8 @@ class SellerController extends Controller
     public function index()
     {
         $seller=Seller::has('products')->get();
-        return response()->json(['data'=>$seller,200]);
+        //return response()->json(['data'=>$seller,200]);
+       return $this->showall($seller);
     }
 
     /**
@@ -47,15 +53,17 @@ class SellerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+
     {
         $seller=Seller::has('products')->findOrFail($id);
         // print_r($seller);
         // die();
-        if(is_null($seller))
-        {
-            return response()->json(["data"=>"id is not exist in the recodes"],404);
-        }
-        return response()->json($seller,200);
+        // if(is_null($seller))
+        // {
+        //     return response()->json(["data"=>"id is not exist in the recodes"],404);
+        // }
+       return $this->showOne($seller);
+          //return response()->json(['data'=>$seller,200]);
     }
 
     /**

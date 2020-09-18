@@ -4,7 +4,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
-trait ApiResponser
+
+trait ApiResponse
 {
 	private function successResponse($data, $code)
 	{
