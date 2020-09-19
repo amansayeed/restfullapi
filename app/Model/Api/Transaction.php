@@ -5,11 +5,12 @@ namespace App\Model\Api;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Api\Product;
 use App\Model\Api\Buyer;
-use App\Model\Api\Seller;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
+    use SoftDeletes;
 
    protected $table="tansactions";
  protected $fillable=
@@ -18,7 +19,7 @@ class Transaction extends Model
      "product_id",
      "buyer_id"
  ];
-
+ protected $dates=['deleted_at'];
  public function buyer()
  {
 

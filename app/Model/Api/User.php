@@ -4,6 +4,7 @@ namespace App\Model\Api;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -11,16 +12,17 @@ use Illuminate\Support\Str;
 
 class User extends Model
 {
+    use Notifiable, SoftDeletes;
 
     protected $table = 'users';
-   // use Notifiable;
+
 
     const VERIFIED_USER = '1';
     const UNVERIFIED_USER = '0';
 
     const ADMIN_USER = 'true';
     const REGULAR_USER = 'false';
-  
+
 
     /**
      * The attributes that are mass assignable.
@@ -28,14 +30,15 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 
-        
+        'name',
+
         'email',
         'password',
         'verified',
         'verification_token',
         'admin',
     ];
+    protected $dates=['deleted_at'];
 
     /**
 
@@ -50,21 +53,21 @@ class User extends Model
 
 
 
-    public function setNameAttribute($name)
-    {
-        $this->attribute['name']=strtolower($name);
-    }
+    // public function setNameAttribute($name)
+    // {
+    //     $this->attribute['name']=strtolower($name);
+    // }
 
-    public function getNameAttribute($name)
-    {
+    // public function getNameAttribute($name)
+    // {
 
-        return $name=ucwords($name);
-    }
+    //     return $name=ucwords($name);
+    // }
 
-    public function setEmailAttribute($name)
-    {
-        $this->attribute['email']=strtolower($email);
-    }
+    // public function setEmailAttribute($name)
+    // {
+    //     $this->attribute['email']=strtolower($email);
+    // }
 
     public function isVerified()
     {
@@ -81,4 +84,4 @@ class User extends Model
         return Str::random(40);
     }
 }
- 
+
