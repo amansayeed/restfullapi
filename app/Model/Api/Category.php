@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Api\Product;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Illuminate\Support\Collection;
 class Category extends Model
 {
     use SoftDeletes;
