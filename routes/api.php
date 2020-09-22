@@ -36,4 +36,6 @@ Route::resource("users",'User\UserController',['except'=>['edit']]);
 
 
 //transaction controller
- Route::resource("transaction",'Transaction\TransactionController',['only'=>['index','show']]);
+// Route::resource("transaction",'Transaction\TransactionController',['only'=>['index','show']]);
+ Route::resource("transaction.category",'Transaction\TransactionController',['only'=>['index']]);
+
