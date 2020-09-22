@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Traits\ApiResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -92,10 +93,22 @@ class Handler extends ExceptionHandler
         }
 
 
+
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->json(['status' => 'failed', 'data' => null, 'message' => 'Data id  not found']);
+        }
+
+
         return parent::render($request, $exception);
 
 
 
 
     }
+
+
+
+
 }
+
+

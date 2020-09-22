@@ -86,7 +86,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->fill($request->$request->intersect([
+
+            'name',
+            'description'
+        ]));
+
+            if(!$category->isDirty())
+            {
+                return $this->showOne($category,201);
+
+                $category->save();
+            }
+            return $this->errorResponse("kindly update the differnet values",422);
+
     }
 
     /**
@@ -97,6 +110,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+    $category->delete();
+   // return response()->json($category);
+   return $this->showOne($category);
     }
 }
