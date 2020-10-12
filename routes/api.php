@@ -24,6 +24,8 @@ Route::resource("users",'User\UserController',['except'=>['edit']]);
 
 // buyer controller
  Route::resource("buyers",'Buyer\BuyerController',['only'=>['index','show']]);
+ Route::resource("buyers.transactions",'Buyer\BuyerTransactionController',['only'=>['index','show']]);
+
 
 // seller controller
  Route::resource("sellers",'Seller\SellerController',['only'=>['index','show']]);
